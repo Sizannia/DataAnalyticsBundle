@@ -1,0 +1,31 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <script type="text/javascript">
+        $().ready(function(){
+            var gdpData = {{ rows | raw }}  ;
+            $('.world-map-gdp').vectorMap({
+                map: 'world_mill_en',
+                series: {
+                    regions: [{
+                        values: gdpData,
+                        scale: ['#C8EEFF', '#0071A4'],
+                        normalizeFunction: 'polynomial'
+                    }]
+                },
+                onRegionTipShow: function(e, el, code) {
+                    el.html(el.html() + ': ' + gdpData[code]);
+                }
+            });
+        });
+    </script>
+    <div class="sonata-news-block-recent-post panel panel-default">
+        {% if settings.title %}
+            <div class="panel-heading">
+                <h3 class="sonata-news-block-recent-post panel-title"><i class="fa fa-pencil"></i> {{ settings.title | trans() ~ ' - ' ~ dateBegin | localizeddate("medium", "short") ~ ' - ' ~ dateEnd | localizeddate("medium", "short") }}</h3>
+            </div>
+        {% endif %}
+
+        <div class="panel-body world-map-gdp" style="height: 430px"></div>
+    </div>
+{% endblock %}

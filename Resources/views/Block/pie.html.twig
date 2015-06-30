@@ -1,0 +1,87 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    {% set id = random(5 * 1000000) %}
+    <script type="text/javascript">
+        $().ready(function () {
+            var data = {{ rows | raw }};
+            var colors = Highcharts.getOptions().colors;
+            var categories = {{ columnHeaders | raw }};
+            var browserData = [];
+            var versionsData = [];
+            var dataLen = data.length;
+            var drillDataLen;
+            var brightness;
+            for (var i = 0; i < dataLen; i += 1) {
+                browserData.push({
+                    name: categories[i],
+                    y: data[i].y,
+                    color: data[i].color
+                });
+                drillDataLen = data[i].drilldown.data.length;
+                for (var j = 0; j < drillDataLen; j += 1) {
+                    brightness = 0.2 - (j / drillDataLen) / 5;
+                    versionsData.push({
+                        name: data[i].drilldown.categories[j],
+                        y: data[i].drilldown.data[j],
+                        color: Highcharts.Color(data[i].color).brighten(brightness).get()
+                    });
+                }
+            }
+            var rows = [{
+                name: 'Browsers',
+                data: browserData,
+                size: '60%',
+                dataLabels: {
+                    formatter: function () {
+                        return this.y > 5 ? this.point.name : null;
+                    },
+                    color: 'white',
+                    distance: -30
+                }
+            }, {
+                name: 'Versions',
+                data: versionsData,
+                size: '80%',
+                innerSize: '60%',
+                dataLabels: {
+                    formatter: function () {
+                    }
+                }
+            }];
+            $("{{ "#" ~ id }}").highcharts({
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: ''
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        shadow: false,
+                        center: ['50%', '50%']
+                    }
+                },
+                tooltip: {
+                    valueSuffix: '%'
+                },
+                series: rows
+            });
+        });
+    </script>
+    <div class="sonata-news-block-recent-post panel panel-default">
+        {% if settings.title %}
+            <div class="panel-heading">
+                <h3 class="sonata-news-block-recent-post panel-title"><i class="fa fa-pencil"></i> {{ settings.title  | trans() ~ ' - ' ~ dateBegin | localizeddate("medium", "short") ~ ' - ' ~ dateEnd | localizeddate("medium", "short") }}</h3>
+            </div>
+        {% endif %}
+        <div class="panel-body">
+            <div id="{{ id }}"></div>
+        </div>
+    </div>
+{% endblock %}

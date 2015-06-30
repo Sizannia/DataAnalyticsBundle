@@ -1,0 +1,28 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div class="sonata-news-block-recent-post panel panel-default">
+        {% if settings.title %}
+            <div class="panel-heading">
+                <h3 class="sonata-news-block-recent-post panel-title"><i class="fa fa-pencil"></i> {{ settings.title | trans() }}</h3>
+            </div>
+        {% endif %}
+
+        <div class="panel-body">
+            <table width="100%">
+                <tr>
+                    {% for column in columnHeaders %}
+                        <td>{{ column }}</td>
+                    {% endfor %}
+                </tr>
+                {% for line in rows %}
+                    <tr>
+                        {% for row in line %}
+                            <td>{{ row }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

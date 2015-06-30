@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="sizannia_data_analytics.block.table" class="Sizannia\DataAnalyticsBundle\Block\TableBlockService">
+            <argument>sizannia_data_analytics.block.table</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="sizannia_data_analytics.loader.google" />
+            <argument type="service" id="sizannia_data_analytics.reader.google.table" />
+            <tag name="sonata.block"/>
+        </service>
+        <service id="sizannia_data_analytics.block.map" class="Sizannia\DataAnalyticsBundle\Block\MapBlockService">
+            <argument>sizannia_data_analytics.block.map</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="sizannia_data_analytics.loader.google" />
+            <argument type="service" id="sizannia_data_analytics.reader.google.map" />
+            <tag name="sonata.block"/>
+        </service>
+        <service id="sizannia_data_analytics.block.pie" class="Sizannia\DataAnalyticsBundle\Block\PieBlockService">
+            <argument>sizannia_data_analytics.block.pie</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="sizannia_data_analytics.loader.google" />
+            <argument type="service" id="sizannia_data_analytics.reader.google.pie" />
+            <tag name="sonata.block"/>
+        </service>
+    </services>
+</container>

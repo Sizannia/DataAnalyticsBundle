@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sizannia_data_analytics.reader.google.map.class">Sizannia\DataAnalyticsBundle\Reader\GoogleAnalytics\MapReader</parameter>
+        <parameter key="sizannia_data_analytics.reader.google.pie.class">Sizannia\DataAnalyticsBundle\Reader\GoogleAnalytics\PieReader</parameter>
+        <parameter key="sizannia_data_analytics.reader.google.table.class">Sizannia\DataAnalyticsBundle\Reader\GoogleAnalytics\TableReader</parameter>
+    </parameters>
+
+    <services>
+        <service id="sizannia_data_analytics.reader.google.map" class="%sizannia_data_analytics.reader.google.map.class%">
+            <argument type="service" id="logger" ></argument>
+        </service>
+        <service id="sizannia_data_analytics.reader.google.pie" class="%sizannia_data_analytics.reader.google.pie.class%">
+            <argument type="service" id="logger" ></argument>
+        </service>
+        <service id="sizannia_data_analytics.reader.google.table" class="%sizannia_data_analytics.reader.google.table.class%">
+            <argument type="service" id="logger" ></argument>
+        </service>
+    </services>
+</container>
