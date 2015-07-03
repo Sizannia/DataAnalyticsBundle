@@ -1,0 +1,23 @@
+{
+  "name": "sizannia/data-analytics-bundle",
+  "type": "symfony-bundle",
+  "description": "",
+  "keywords": ["google analytics", "block", "sonata", "dashboard"],
+  "license": "GPL-3.0+",
+  "authors": [
+    {
+      "name": "Thibaut ALGRIN",
+      "email": "algrin.thibaut@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.2",
+    "widop/google-analytics-bundle": "1.1.*",
+    "sonata-project/block-bundle": "~2.3"
+  },
+  "autoload": {
+    "psr-0": {"Sizannia\\DataAnalyticsBundle": ""}
+  },
+  "target-dir": "Sizannia/DataAnalyticsBundle",
+  "minimum-stability": "stable"
+}

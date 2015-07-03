@@ -2,7 +2,7 @@
 
 namespace Sizannia\DataAnalyticsBundle\Block;
 
-use Sizannia\DataAnalyticsBundle\Reader\GoogleAnalyticsReader;
+use Sizannia\DataAnalyticsBundle\Loader\InterfaceLoader;
 use Sizannia\DataAnalyticsBundle\Reader\InterfaceReader;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BaseBlockService;
@@ -12,12 +12,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Sizannia\DataAnalyticsBundle\Loader\GoogleAnalyticsLoader;
 
 class MapBlockService extends BaseBlockService {
 
     /**
-     * @var GoogleAnalyticsLoader
+     * @var InterfaceLoader
      */
     private $loader;
 
@@ -29,24 +28,13 @@ class MapBlockService extends BaseBlockService {
     /**
      * @param string $name
      * @param EngineInterface $templating
-     * @param GoogleAnalyticsLoader $loader
+     * @param InterfaceLoader $loader
      * @param InterfaceReader $reader
      */
-    public function __construct($name, EngineInterface $templating, GoogleAnalyticsLoader $loader, InterfaceReader $reader) {
+    public function __construct($name, EngineInterface $templating, InterfaceLoader $loader, InterfaceReader $reader) {
         parent::__construct($name, $templating);
         $this->loader = $loader;
         $this->reader = $reader;
-    }
-
-    private function mergeRow($array) {
-        if (!is_array($array)) {
-            return FALSE;
-        }
-        $result = array();
-        foreach ($array as $value) {
-            $result[$value[0]] = $value[1];
-        }
-        return $result;
     }
 
     /**

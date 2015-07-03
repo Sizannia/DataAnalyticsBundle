@@ -6,7 +6,8 @@ use Widop\GoogleAnalytics\Client;
 use Widop\GoogleAnalytics\Service;
 use Widop\GoogleAnalytics\Query;
 
-class GoogleAnalyticsLoader {
+class GoogleAnalyticsLoader implements InterfaceLoader
+{
 
     /**
      * @var array
@@ -64,7 +65,8 @@ class GoogleAnalyticsLoader {
      * @return \Widop\GoogleAnalytics\Response
      * @throws \Widop\GoogleAnalytics\Exception\GoogleAnalyticsException
      */
-    public function execute() {
+    public function execute()
+    {
         $this->query = $this->defaultQuery;
         $this->query->setStartDate($this->dateBegin);
         $this->query->setEndDate($this->dateEnd);
