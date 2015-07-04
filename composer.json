@@ -13,7 +13,7 @@
   "require": {
     "php": ">=5.5.2",
     "widop/google-analytics-bundle": "1.1.*",
-    "sonata-project/block-bundle": "~2.3"
+    "sonata-project/block-bundle": "~2.2"
   },
   "autoload": {
     "psr-0": {"Sizannia\\DataAnalyticsBundle": ""}
