@@ -5,6 +5,11 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="sizannia_data_analytics.block.gauge" class="Sizannia\DataAnalyticsBundle\Block\GaugeBlockService">
+            <argument>sizannia_data_analytics.block.gauge</argument>
+            <argument type="service" id="templating" />
+            <tag name="sonata.block"/>
+        </service>
         <service id="sizannia_data_analytics.block.table" class="Sizannia\DataAnalyticsBundle\Block\TableBlockService">
             <argument>sizannia_data_analytics.block.table</argument>
             <argument type="service" id="templating" />

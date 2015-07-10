@@ -1,0 +1,12 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div class="sonata-news-block-recent-post panel panel-default">
+    {% if settings.title %}
+        <div class="panel-heading">
+            <h3 class="sonata-news-block-recent-post panel-title"><i class="fa fa-dahboard"></i> {{ settings.title | trans() }}</h3>
+        </div>
+    {% endif %}
+        <div class="container-speed" data-speed="3" data-url="{{ path(settings.url) }}"></div>
+    </div>
+{% endblock %}

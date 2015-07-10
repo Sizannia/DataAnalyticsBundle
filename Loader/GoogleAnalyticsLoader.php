@@ -63,7 +63,6 @@ class GoogleAnalyticsLoader implements InterfaceLoader
 
     /**
      * @return \Widop\GoogleAnalytics\Response
-     * @throws \Widop\GoogleAnalytics\Exception\GoogleAnalyticsException
      */
     public function execute()
     {
