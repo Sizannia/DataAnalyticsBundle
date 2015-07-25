@@ -17,7 +17,7 @@ function update() {
                 if (newVal < 0 || newVal > 10000) {
                     newVal = point.y - inc;
                 }
-                point.update(inc);
+                point.update(inc / 1000);
             }
         },
         error: function(){
@@ -30,42 +30,79 @@ $(function () {
 //    console.log($('.container-speed').data());
     var gaugeOptions = {
         chart: {
-            type: 'solidgauge'
+            type: 'gauge',
+            plotBackgroundColor: null,
+            plotBackgroundImage: null,
+            plotBorderWidth: 0,
+            plotShadow: false
         },
         title: null,
         pane: {
-            center: ['50%', '50%'],
-            size: '90%',
-            startAngle: -90,
-            endAngle: 90,
-            background: {
-                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
-                innerRadius: '60%',
-                outerRadius: '100%',
-                shape: 'arc'
-            }
-        },
-        tooltip: {
-            enabled: false
+            startAngle: -150,
+            endAngle: 150,
+            background: [{
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#FFF'],
+                        [1, '#333']
+                    ]
+                },
+                borderWidth: 0,
+                outerRadius: '109%'
+            }, {
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#333'],
+                        [1, '#FFF']
+                    ]
+                },
+                borderWidth: 1,
+                outerRadius: '107%'
+            }, {
+                // default background
+            }, {
+                backgroundColor: '#DDD',
+                borderWidth: 0,
+                outerRadius: '105%',
+                innerRadius: '103%'
+            }]
         },
         yAxis: {
             min: 0,
-            max: 10000,
-            stops: [
-                [0.1, '#55BF3B'], // green
-                [0.5, '#DDDF0D'], // yellow
-                [0.9, '#DF5353'] // red
-            ],
-            lineWidth: 0,
-            minorTickInterval: null,
-            tickPixelInterval: 400,
-            tickWidth: 0,
-            title: {
-                y: -90
-            },
+            max: 10,
+            minorTickInterval: 'auto',
+            minorTickWidth: 1,
+            minorTickLength: 10,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+
+            tickPixelInterval: 30,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
             labels: {
-                y: 16
-            }
+                step: 2,
+                rotation: 'auto'
+            },
+            title: {
+                text: 'sec'
+            },
+            plotBands: [{
+                from: 0,
+                to: 2,
+                color: '#55BF3B' // green
+            }, {
+                from: 2,
+                to: 6,
+                color: '#DDDF0D' // yellow
+            }, {
+                from: 6,
+                to: 10,
+                color: '#DF5353' // red
+            }]
         },
         plotOptions: {
             solidgauge: {
@@ -88,11 +125,7 @@ $(function () {
             data: [0],
             dataLabels: {
                 format: '<div style="text-align:center"><span style="font-size:25px;color:' +
-                ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
-                '<span style="font-size:12px;color:silver">mms</span></div>'
-            },
-            tooltip: {
-                valueSuffix: ' mms'
+                ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>'
             }
         }]
 
