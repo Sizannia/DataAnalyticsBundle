@@ -27,7 +27,6 @@ function update() {
 
 
 $(function () {
-//    console.log($('.container-speed').data());
     var gaugeOptions = {
         chart: {
             type: 'gauge',
@@ -115,21 +114,23 @@ $(function () {
         }
     };
     // The speed gauge
-    $('.container-speed').highcharts(Highcharts.merge(gaugeOptions, {
-        credits: {
-            enabled: false
-        },
+    if (typeof $('.container-speed').data() != "undefined") {
+        $('.container-speed').highcharts(Highcharts.merge(gaugeOptions, {
+            credits: {
+                enabled: false
+            },
 
-        series: [{
-            name: 'Speed',
-            data: [0],
-            dataLabels: {
-                format: '<div style="text-align:center"><span style="font-size:25px;color:' +
-                ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>'
-            }
-        }]
+            series: [{
+                name: 'Speed',
+                data: [0],
+                dataLabels: {
+                    format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+                    ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>'
+                }
+            }]
 
-    }));
-    update();
-    setInterval(update, 10000);
+        }));
+        update();
+        setInterval(update, 10000);
+    }
 });
